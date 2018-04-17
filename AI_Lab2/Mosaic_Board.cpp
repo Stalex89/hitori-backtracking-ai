@@ -32,17 +32,7 @@ bool Mosaic_Board::BacktrackAlgorithm(int row, int column, Mosaic_Board *board)
 		PrintBoard();
 		if (CheckRowSequence(row) && CheckColumnSequence(column) && CheckRowUniqueness() /*&& CheckColumnUniqueness()*/)
 		{
-			
-			//column++;
-			//int columnNext = column;
 			int columnNext = (column == boardSize-1)? 0 : column+1;
-			//int rowNext = row;
-			//if(columnNext >= boardSize)
-			//{
-
-			//	rowNext++;
-			//	columnNext = 0;
-			//}
 			int rowNext = (column == boardSize-1) ? row + 1 : row;
 			if (BacktrackAlgorithm(rowNext, columnNext, board))
 				return true;
@@ -84,9 +74,9 @@ void Mosaic_Board::RemoveElement(int row, int column)
 
 void Mosaic_Board::PrintBoard()
 {
-	for (int i = 0; i < board.size(); i++)
+	for (unsigned int i = 0; i < board.size(); i++)
 	{
-		for (int j = 0; j < board.at(i).size(); j++)
+		for (unsigned int j = 0; j < board.at(i).size(); j++)
 		{
 			if (board.at(i).at(j) == NULL)
 				cout << "0 ";
@@ -97,37 +87,11 @@ void Mosaic_Board::PrintBoard()
 	cout << '\n';
 }
 
-//bool Board::CheckSequence(deque<char> &line)
-//{
-//	int xCount = 0;
-//	int yCount = 0;
-//	for (int i = 0; i < line.size(); i++)
-//	{
-//		if (line.at(i) == 'X')
-//		{
-//			xCount++;
-//			yCount = 0;
-//		}
-//
-//		if (line.at(i) == 'Y')
-//		{
-//			yCount++;
-//			xCount = 0;
-//		}
-//
-//		// If there is more that two same symbols in row, return false 
-//		if (xCount > 2 || yCount > 2)
-//			return false;
-//	}
-//
-//	return true;
-//}
-
 bool Mosaic_Board::CheckRowSequence(int idx)
 {
 	int xCount = 0;
 	int yCount = 0;
-	for (int i = 0; i < board.at(idx).size(); i++)
+	for (unsigned int i = 0; i < board.at(idx).size(); i++)
 	{
 
 		if (board.at(idx).at(i) == 'X')

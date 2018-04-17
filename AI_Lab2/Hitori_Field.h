@@ -1,20 +1,26 @@
 #pragma once
+
+enum State
+{
+	BLACK,
+	WHITE,
+	MAX_STATE,
+	NONE,
+};
+
 class Hitori_Field
 {
-	enum State
-	{
-		NONE,
-		BLACK,
-		WHITE,
-	};
 
 
-	int rowIdx;
-	int colIdx;
-	State state;
+	int m_number;
+	State m_state;
 
 public:
-	Hitori_Field();
+	Hitori_Field(int number);
+	Hitori_Field(int number, State state);
+	int GetNumber() { return m_number; }
+	State GetState() { return m_state; }
+	string GetStringState();
 	~Hitori_Field();
 };
 
