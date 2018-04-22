@@ -8,8 +8,8 @@ class Hitori_Board
 	deque<deque<Hitori_Field>> m_board;
 
 public:
-	Hitori_Board(int fieldSize);
-	void InitBoard();
+	Hitori_Board(int fieldSize, int number);
+	void InitBoard(int number);
 	void PrintBoard();
 	//bool CheckRowUnique(int idx);
 	//bool CheckColumnUnique(int idx);

@@ -2,7 +2,7 @@
 #include "Hitori_Board.h"
 
 
-Hitori_Board::Hitori_Board(int fieldSize)
+Hitori_Board::Hitori_Board(int fieldSize, int number)
 {
 	if (fieldSize < 1)
 		throw invalid_argument("size should be bigger than 1\n");
@@ -10,42 +10,156 @@ Hitori_Board::Hitori_Board(int fieldSize)
 	m_fieldSize = fieldSize;
 	for (int idx = 0; idx < fieldSize; idx++)
 		m_board.push_back(deque<Hitori_Field>());
-	InitBoard();
+	InitBoard(number);
 }
 
 
 // Initialize some Hitori sample 
-void Hitori_Board::InitBoard()
+void Hitori_Board::InitBoard(int number)
 {
-	m_board.at(0).push_back(Hitori_Field(2));
-	m_board.at(0).push_back(Hitori_Field(1));
-	m_board.at(0).push_back(Hitori_Field(3));
-	m_board.at(0).push_back(Hitori_Field(3));
-	m_board.at(0).push_back(Hitori_Field(3));
+	if (m_fieldSize == 5)
+	{
+		if (number == 1)
+		{
+			m_board.at(0).push_back(Hitori_Field(2));
+			m_board.at(0).push_back(Hitori_Field(1));
+			m_board.at(0).push_back(Hitori_Field(3));
+			m_board.at(0).push_back(Hitori_Field(3));
+			m_board.at(0).push_back(Hitori_Field(3));
 
-	m_board.at(1).push_back(Hitori_Field(1));
-	m_board.at(1).push_back(Hitori_Field(4));
-	m_board.at(1).push_back(Hitori_Field(4));
-	m_board.at(1).push_back(Hitori_Field(2));
-	m_board.at(1).push_back(Hitori_Field(3));
+			m_board.at(1).push_back(Hitori_Field(1));
+			m_board.at(1).push_back(Hitori_Field(4));
+			m_board.at(1).push_back(Hitori_Field(4));
+			m_board.at(1).push_back(Hitori_Field(2));
+			m_board.at(1).push_back(Hitori_Field(3));
 
-	m_board.at(2).push_back(Hitori_Field(4));
-	m_board.at(2).push_back(Hitori_Field(3));
-	m_board.at(2).push_back(Hitori_Field(3));
-	m_board.at(2).push_back(Hitori_Field(5));
-	m_board.at(2).push_back(Hitori_Field(5));
+			m_board.at(2).push_back(Hitori_Field(4));
+			m_board.at(2).push_back(Hitori_Field(3));
+			m_board.at(2).push_back(Hitori_Field(3));
+			m_board.at(2).push_back(Hitori_Field(5));
+			m_board.at(2).push_back(Hitori_Field(5));
 
-	m_board.at(3).push_back(Hitori_Field(5));
-	m_board.at(3).push_back(Hitori_Field(4));
-	m_board.at(3).push_back(Hitori_Field(3));
-	m_board.at(3).push_back(Hitori_Field(1));
-	m_board.at(3).push_back(Hitori_Field(2));
+			m_board.at(3).push_back(Hitori_Field(5));
+			m_board.at(3).push_back(Hitori_Field(4));
+			m_board.at(3).push_back(Hitori_Field(3));
+			m_board.at(3).push_back(Hitori_Field(1));
+			m_board.at(3).push_back(Hitori_Field(2));
 
-	m_board.at(4).push_back(Hitori_Field(3));
-	m_board.at(4).push_back(Hitori_Field(3));
-	m_board.at(4).push_back(Hitori_Field(1));
-	m_board.at(4).push_back(Hitori_Field(3));
-	m_board.at(4).push_back(Hitori_Field(5));
+			m_board.at(4).push_back(Hitori_Field(3));
+			m_board.at(4).push_back(Hitori_Field(3));
+			m_board.at(4).push_back(Hitori_Field(1));
+			m_board.at(4).push_back(Hitori_Field(3));
+			m_board.at(4).push_back(Hitori_Field(5));
+		}
+		else if (number == 2)
+		{
+			m_board.at(0).push_back(Hitori_Field(2));
+			m_board.at(0).push_back(Hitori_Field(2));
+			m_board.at(0).push_back(Hitori_Field(5));
+			m_board.at(0).push_back(Hitori_Field(5));
+			m_board.at(0).push_back(Hitori_Field(4));
+
+			m_board.at(1).push_back(Hitori_Field(4));
+			m_board.at(1).push_back(Hitori_Field(3));
+			m_board.at(1).push_back(Hitori_Field(3));
+			m_board.at(1).push_back(Hitori_Field(1));
+			m_board.at(1).push_back(Hitori_Field(5));
+
+			m_board.at(2).push_back(Hitori_Field(4));
+			m_board.at(2).push_back(Hitori_Field(4));
+			m_board.at(2).push_back(Hitori_Field(1));
+			m_board.at(2).push_back(Hitori_Field(2));
+			m_board.at(2).push_back(Hitori_Field(1));
+
+			m_board.at(3).push_back(Hitori_Field(2));
+			m_board.at(3).push_back(Hitori_Field(5));
+			m_board.at(3).push_back(Hitori_Field(5));
+			m_board.at(3).push_back(Hitori_Field(3));
+			m_board.at(3).push_back(Hitori_Field(1));
+
+			m_board.at(4).push_back(Hitori_Field(1));
+			m_board.at(4).push_back(Hitori_Field(5));
+			m_board.at(4).push_back(Hitori_Field(4));
+			m_board.at(4).push_back(Hitori_Field(5));
+			m_board.at(4).push_back(Hitori_Field(1));
+		}
+		else cout << "Please enter correct puzzle number (1 or 2)!\n\n";
+	}
+	else if (m_fieldSize == 8)
+	{
+		m_board.at(0).push_back(Hitori_Field(7));
+		m_board.at(0).push_back(Hitori_Field(5));
+		m_board.at(0).push_back(Hitori_Field(8));
+		m_board.at(0).push_back(Hitori_Field(1));
+		m_board.at(0).push_back(Hitori_Field(5));
+		m_board.at(0).push_back(Hitori_Field(4));
+		m_board.at(0).push_back(Hitori_Field(6));
+		m_board.at(0).push_back(Hitori_Field(8));
+
+		m_board.at(1).push_back(Hitori_Field(4));
+		m_board.at(1).push_back(Hitori_Field(4));
+		m_board.at(1).push_back(Hitori_Field(3));
+		m_board.at(1).push_back(Hitori_Field(2));
+		m_board.at(1).push_back(Hitori_Field(8));
+		m_board.at(1).push_back(Hitori_Field(5));
+		m_board.at(1).push_back(Hitori_Field(3));
+		m_board.at(1).push_back(Hitori_Field(1));
+
+		m_board.at(2).push_back(Hitori_Field(7));
+		m_board.at(2).push_back(Hitori_Field(2));
+		m_board.at(2).push_back(Hitori_Field(4));
+		m_board.at(2).push_back(Hitori_Field(1));
+		m_board.at(2).push_back(Hitori_Field(7));
+		m_board.at(2).push_back(Hitori_Field(7));
+		m_board.at(2).push_back(Hitori_Field(3));
+		m_board.at(2).push_back(Hitori_Field(5));
+
+		m_board.at(3).push_back(Hitori_Field(8));
+		m_board.at(3).push_back(Hitori_Field(2));
+		m_board.at(3).push_back(Hitori_Field(6));
+		m_board.at(3).push_back(Hitori_Field(7));
+		m_board.at(3).push_back(Hitori_Field(1));
+		m_board.at(3).push_back(Hitori_Field(2));
+		m_board.at(3).push_back(Hitori_Field(6));
+		m_board.at(3).push_back(Hitori_Field(4));
+
+		m_board.at(4).push_back(Hitori_Field(6));
+		m_board.at(4).push_back(Hitori_Field(4));
+		m_board.at(4).push_back(Hitori_Field(5));
+		m_board.at(4).push_back(Hitori_Field(3));
+		m_board.at(4).push_back(Hitori_Field(6));
+		m_board.at(4).push_back(Hitori_Field(1));
+		m_board.at(4).push_back(Hitori_Field(2));
+		m_board.at(4).push_back(Hitori_Field(7));
+
+		m_board.at(5).push_back(Hitori_Field(4));
+		m_board.at(5).push_back(Hitori_Field(3));
+		m_board.at(5).push_back(Hitori_Field(1));
+		m_board.at(5).push_back(Hitori_Field(7));
+		m_board.at(5).push_back(Hitori_Field(6));
+		m_board.at(5).push_back(Hitori_Field(8));
+		m_board.at(5).push_back(Hitori_Field(6));
+		m_board.at(5).push_back(Hitori_Field(2));
+
+		m_board.at(6).push_back(Hitori_Field(2));
+		m_board.at(6).push_back(Hitori_Field(3));
+		m_board.at(6).push_back(Hitori_Field(7));
+		m_board.at(6).push_back(Hitori_Field(4));
+		m_board.at(6).push_back(Hitori_Field(2));
+		m_board.at(6).push_back(Hitori_Field(3));
+		m_board.at(6).push_back(Hitori_Field(8));
+		m_board.at(6).push_back(Hitori_Field(8));
+
+		m_board.at(7).push_back(Hitori_Field(3));
+		m_board.at(7).push_back(Hitori_Field(1));
+		m_board.at(7).push_back(Hitori_Field(2));
+		m_board.at(7).push_back(Hitori_Field(6));
+		m_board.at(7).push_back(Hitori_Field(5));
+		m_board.at(7).push_back(Hitori_Field(3));
+		m_board.at(7).push_back(Hitori_Field(4));
+		m_board.at(7).push_back(Hitori_Field(8));
+	}
+	
 }
 
 void Hitori_Board::PrintBoard()
