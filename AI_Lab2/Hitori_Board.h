@@ -11,13 +11,22 @@ public:
 	Hitori_Board(int fieldSize);
 	void InitBoard();
 	void PrintBoard();
-	bool CheckRowUnique(int idx);
-	bool CheckColumnUnique(int idx);
-	bool CheckShadedSequence(int row, int column);
-	bool CheckContinuousArea(int row, int column);
+	//bool CheckRowUnique(int idx);
+	//bool CheckColumnUnique(int idx);
+	bool HasShadedNeghbour(int row, int column);
+	bool IsContinuousArea(int row, int column);
 	void DFSUtil(int row, int column, vector<vector<bool>> &visited, int &visitedCount);
-	bool BacktrackAlgorithm(int row, int column);
-	vector<int> FindRowMultipleElements(int row);
+	//bool BacktrackAlgorithm(int row, int column, vector<vector<int>> &indices);
+	//bool BacktrackAlgorithm(int row, int column);
+	//vector<vector<int>> FindDuplicateIndices();
+	//vector<int> FindRowDuplicateIndices(int row);
 	~Hitori_Board();
+
+	bool UsedInRow(int row, int num);
+	bool UsedInCol(int column, int num);
+	bool IsConstraintSafe(int row, int column, int num, State state);
+	bool SolveHitori();
+	bool FindFieldWithState(int &row, int &column, State state);
+
 };
 
