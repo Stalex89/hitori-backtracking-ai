@@ -335,6 +335,20 @@ void Hitori_Board::PrintBoard()
 	cout << '\n';
 }
 
+void Hitori_Board::PrintBoardFC()
+{
+	for (int i = 0; i < m_fieldSize; i++)
+	{
+		for (int j = 0; j < m_fieldSize; j++)
+		{
+			cout << "(" << m_board.at(i).at(j).GetNumber() << ", " << m_board.at(i).at(j).GetStringState() 
+				<< ", <" << m_board.at(i).at(j).GetDomainValueAt(0) << ", " << m_board.at(i).at(j).GetDomainValueAt(1) << ">) ";
+		}
+		cout << '\n';
+	}
+	cout << '\n';
+}
+
 bool Hitori_Board::FindFieldWithState(int &row, int &column, State state)
 {
 	for (row = 0; row < m_fieldSize; row++)
@@ -345,10 +359,6 @@ bool Hitori_Board::FindFieldWithState(int &row, int &column, State state)
 }
 
 #pragma region ConstraintCheckers
-
-
-
-
 
 // Checks if any other white field in a row has same number
 bool Hitori_Board::UsedInRow(int row, int num)
@@ -513,7 +523,7 @@ bool Hitori_Board::IsConstraintSafe(int row, int column, int num, State state)
 
 #pragma endregion
 
-bool Hitori_Board::SolveHitori()
+bool Hitori_Board::BackTracking()
 {
 	int row, column;
 
@@ -537,7 +547,7 @@ bool Hitori_Board::SolveHitori()
 			PrintBoard();
 
 			// return if success
-			if (SolveHitori())
+			if (BackTracking())
 				return true;
 
 			// if failure, unmake and try again
@@ -551,7 +561,262 @@ bool Hitori_Board::SolveHitori()
 	
 }
 
+#pragma region ConstraintCheckersFC
+
+// Checks if any other white field in a row has same number
+bool Hitori_Board::UsedInRowFC(int row, int num)
+{
+	for (unsigned int i = 0; i < m_board.at(row).size(); i++)
+		if (m_board.at(row).at(i).GetNumber() == num && m_board.at(row).at(i).GetState() == State::WHITE)
+		{
+			cout << "There is already white field with number " << num << " in (" << row << "," << i << ")\n\n";
+			return true;
+		}
+
+	cout << "There are no white fields with number " << num << " in " << row << " row\n\n";
+	return false;
+}
+
+
+
+// Checks if any other white field in a column has same number
+bool Hitori_Board::UsedInColFC(int column, int num)
+{
+	for (int i = 0; i < m_fieldSize; i++)
+		if (m_board.at(i).at(column).GetNumber() == num && m_board.at(i).at(column).GetState() == State::WHITE)
+		{
+			cout << "There is already white field with number " << num << " in (" << i << "," << column << ")\n\n";
+			return true;
+		}
+
+	cout << "There are no white fields with number " << num << " in " << column << " column\n\n";
+	return false;
+}
+
+
+// Cheks if there is a shaded adjacent field  
+bool Hitori_Board::HasShadedNeghbourFC(int row, int column)
+{
+	if (row != 0)
+		if (m_board.at(row - 1).at(column).GetState() == State::BLACK)
+		{
+			cout << "element (" << row << "," << column << ") has shaded neighbour at top (" << row - 1 << "," << column << ")\n\n";
+			return true;
+		}
+
+	if (column != 0)
+		if (m_board.at(row).at(column - 1).GetState() == State::BLACK)
+		{
+			cout << "element (" << row << "," << column << ") has shaded neighbour at left (" << row << "," << column - 1 << ")\n\n";
+			return true;
+		}
+
+	if (row != m_fieldSize - 1)
+		if (m_board.at(row + 1).at(column).GetState() == State::BLACK)
+		{
+			cout << "element (" << row << "," << column << ") has shaded neighbour at bottom (" << row + 1 << "," << column << ")\n\n";
+			return true;
+		}
+
+	if (column != m_fieldSize - 1)
+		if (m_board.at(row).at(column + 1).GetState() == State::BLACK)
+		{
+			cout << "element (" << row << "," << column << ") has shaded neighbour at right (" << row << "," << column + 1 << ")\n\n";
+			return true;
+		}
+
+	cout << "element (" << row << "," << column << ") has no shaded neighbours \n\n";
+	return false;
+}
+
+// Depth first search utility for "islands" checking
+void Hitori_Board::DFSUtilFC(int row, int column, vector<vector<bool>> &visited, int &visitedCount)
+{
+	visited.at(row).at(column) = true;
+
+	// If we visited whit field, increment the visited counter
+	if (m_board.at(row).at(column).GetState() == State::WHITE)
+		visitedCount++;
+
+	/*for (int i = 0; i < m_fieldSize; i++)
+	{
+	for (int j = 0; j < m_fieldSize; j++)
+	{
+	cout << visited.at(i).at(j) << " ";
+	}
+	cout << "\n";
+	}
+	cout << "\n";*/
+
+	if (row != 0)
+		if (m_board.at(row - 1).at(column).GetState() != State::BLACK && !visited.at(row - 1).at(column))
+			DFSUtil(row - 1, column, visited, visitedCount);
+
+	if (column != 0)
+		if (m_board.at(row).at(column - 1).GetState() != State::BLACK && !visited.at(row).at(column - 1))
+			DFSUtil(row, column - 1, visited, visitedCount);
+
+	if (row != m_fieldSize - 1)
+		if (m_board.at(row + 1).at(column).GetState() != State::BLACK && !visited.at(row + 1).at(column))
+			DFSUtil(row + 1, column, visited, visitedCount);
+
+	if (column != m_fieldSize - 1)
+		if (m_board.at(row).at(column + 1).GetState() != State::BLACK && !visited.at(row).at(column + 1))
+			DFSUtil(row, column + 1, visited, visitedCount);
+}
+
+// Checks if there is no "islands" on the board
+bool Hitori_Board::IsContinuousAreaFC(int row, int column)
+{
+	if (m_board.at(row).at(column).GetState() == State::BLACK)
+		return false;
+
+	vector<vector<bool>> visited;
+	int whiteCount = 0;
+	int visitedCount = 0;
+
+	for (int i = 0; i < m_fieldSize; i++)
+	{
+		visited.push_back(vector<bool>());
+		for (int j = 0; j < m_fieldSize; j++)
+		{
+			visited.at(i).push_back(false);
+			//cout << visited.at(i).at(j) << " ";
+
+			if (m_board.at(i).at(j).GetState() == State::WHITE)
+				whiteCount++;
+		}
+		//cout << "\n";
+	}
+	//cout << "\n";
+
+	DFSUtilFC(row, column, visited, visitedCount);
+
+	if (visitedCount == whiteCount)
+	{
+		cout << "Area is continuous\n\n";
+		return true;
+	}
+	cout << "Area is not continuous\n\n";
+	return false;
+
+}
+
+// Checks if all constraints are satisfied
+bool Hitori_Board::IsConstraintSafeFC(int row, int column, int num, State state)
+{
+	// Check constraints for white field
+	if (state == State::WHITE)
+		return (!UsedInRow(row, num) && !UsedInCol(column, num));
+
+	// Check constraints for black field
+	else if (state == State::BLACK)
+	{
+		// find first white element on board
+		int whiteRow, whiteColumn;
+		if (FindFieldWithState(whiteRow, whiteColumn, State::WHITE))
+			return (!HasShadedNeghbour(row, column) && IsContinuousArea(whiteRow, whiteColumn));
+		else
+			return (!HasShadedNeghbour(row, column));
+	}
+	else
+		return false;
+}
+
+
+#pragma endregion
+
+
 #pragma region ForwardChecking
+
+bool Hitori_Board::ConstraintCheckFC(int row, int column)
+{
+	// For every field in board
+	for (int i = 0; i < m_fieldSize; i++)
+		for (int j = 0; j < m_fieldSize; j++)
+		{
+			// Exclude the current recursion field
+			if (i != row && j != column)
+			{
+				// check constraints for 
+				for (int i = 0; i < State::MAX_STATE; i++)
+				{
+					if (!IsConstraintSafeFC(i, j, m_board.at(i).at(j).GetNumber(), State(i)))
+						m_board.at(i).at(j).SetDomainValueAt(i, 0);
+				}
+
+				// If field has no possible values, return false
+				if (m_board.at(i).at(j).GetDomainValueAt(0) == 0 && m_board.at(i).at(j).GetDomainValueAt(1) == 0)
+					return false;
+			}
+		}
+	return true;
+}
+
+bool Hitori_Board::FindFieldWithStateFC(int &row, int &column, State state)
+{
+	for (row = 0; row < m_fieldSize; row++)
+		for (column = 0; column < m_fieldSize; column++)
+			if ((m_board.at(row).at(column).GetDomainValueAt(0) == 1 && m_board.at(row).at(column).GetDomainValueAt(1) == 0 && m_board.at(row).at(column).GetState() == state) ||
+				(m_board.at(row).at(column).GetDomainValueAt(0) == 0 && m_board.at(row).at(column).GetDomainValueAt(1) == 1 && m_board.at(row).at(column).GetState() == state))
+				return true;
+	return false;
+}
+
+bool Hitori_Board::ForwardChecking()
+{
+	int row, column;
+
+	// if There is no unassigned fields, we are done
+	if (!FindFieldWithStateFC(row, column, State::GRAY) && !FindFieldWithState(row, column, State::GRAY))
+			return true;
+
+	// consider states white = 0 and black = 1
+	for (int i = 0; i < State::MAX_STATE; i++)
+	{
+		//if the state is vailable at domain
+		if(m_board.at(row).at(column).GetDomainValueAt(i))
+		{	
+			
+			// make tentative assignment
+			m_board.at(row).at(column).SetState((State)(i));
+			m_board.at(row).at(column).SetDomainValueAt(i, false);
+			cout << "assigned state = " << (State)(i) << " on field (" << row << "," << column << ")\n\n";
+
+			//make a backup copy of hitori domains to backtrack to
+			deque<deque<array<bool,2>>> backDomain;
+			for (int i = 0; i < m_fieldSize; i++)
+			{
+				backDomain.push_back(deque<array<bool,2>>());
+				for (int j = 0; j < m_fieldSize; j++)
+					backDomain.at(i).push_back(m_board.at(i).at(j).GetDomainArray());
+			}
+
+			PrintBoardFC();
+
+			if(ConstraintCheckFC(row, column) && BackTracking())
+				// return if success
+				return true;
+
+			// if failure, unmake and try again
+
+			cout << "unassigned state = " << (State)(i) << " on field (" << row << "," << column << ")\n\n";
+			m_board.at(row).at(column).SetState(State::GRAY);
+
+			cout << "return previous domain state of the board\n\n";
+			for (int i = 0; i < m_fieldSize; i++)
+				for (int j = 0; j < m_fieldSize; j++)
+					m_board.at(i).at(j).SetDomainArray(backDomain.at(i).at(j));
+		}
+	}
+	cout << "apply backtracking\n\n";
+	return false; // this triggers backtracking
+
+}
+
+#pragma endregion
+
+#pragma region CheckPatterns
 
 // If you have a corner with two similar numbers, you can set a white cell
 void Hitori_Board::CheckDoubleCorner()

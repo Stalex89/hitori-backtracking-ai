@@ -23,6 +23,27 @@ string Hitori_Field::GetStringState()
 	}
 }
 
+bool Hitori_Field::GetDomainValueAt(int idx)
+{
+	return m_domain.at(idx);
+}
+
+void Hitori_Field::SetDomainValueAt(int idx, bool value)
+{
+	m_domain.at(idx) = value;
+}
+
+array<bool, 2> Hitori_Field::GetDomainArray() 
+{ 
+	return m_domain; 
+}
+
+void Hitori_Field::SetDomainArray(array<bool, 2> &domain) 
+{ 
+	m_domain[0] = domain[0]; 
+	m_domain[1] = domain[1];
+}
+
 
 Hitori_Field::~Hitori_Field()
 {
