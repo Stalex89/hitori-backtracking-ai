@@ -28,5 +28,9 @@ public:
 	bool SolveHitori();
 	bool FindFieldWithState(int &row, int &column, State state);
 
+	// Forward checking functions
+	void CheckforPatterns();
+	void CheckDoubleCorner();
+
 };
 

@@ -85,6 +85,7 @@ void Hitori_Board::InitBoard(int number)
 		}
 		else cout << "Please enter correct puzzle number (1 or 2)!\n\n";
 	}
+
 	else if (m_fieldSize == 8)
 	{
 		m_board.at(0).push_back(Hitori_Field(7));
@@ -159,6 +160,165 @@ void Hitori_Board::InitBoard(int number)
 		m_board.at(7).push_back(Hitori_Field(4));
 		m_board.at(7).push_back(Hitori_Field(8));
 	}
+
+	/*else if (m_fieldSize == 12)
+	{
+		m_board.at(0).push_back(Hitori_Field(9));
+		m_board.at(0).push_back(Hitori_Field(9));
+		m_board.at(0).push_back(Hitori_Field(10));
+		m_board.at(0).push_back(Hitori_Field(12));
+		m_board.at(0).push_back(Hitori_Field(5));
+		m_board.at(0).push_back(Hitori_Field(12));
+		m_board.at(0).push_back(Hitori_Field(6));
+		m_board.at(0).push_back(Hitori_Field(7));
+		m_board.at(0).push_back(Hitori_Field(7));
+		m_board.at(0).push_back(Hitori_Field(11));
+		m_board.at(0).push_back(Hitori_Field(9));
+		m_board.at(0).push_back(Hitori_Field(1));
+
+		m_board.at(1).push_back(Hitori_Field(7));
+		m_board.at(1).push_back(Hitori_Field(7));
+		m_board.at(1).push_back(Hitori_Field(11));
+		m_board.at(1).push_back(Hitori_Field(2));
+		m_board.at(1).push_back(Hitori_Field(4));
+		m_board.at(1).push_back(Hitori_Field(3));
+		m_board.at(1).push_back(Hitori_Field(3));
+		m_board.at(1).push_back(Hitori_Field(9));
+		m_board.at(1).push_back(Hitori_Field(1));
+		m_board.at(1).push_back(Hitori_Field(8));
+		m_board.at(1).push_back(Hitori_Field(6));
+		m_board.at(1).push_back(Hitori_Field(10));
+
+		m_board.at(2).push_back(Hitori_Field(8));
+		m_board.at(2).push_back(Hitori_Field(4));
+		m_board.at(2).push_back(Hitori_Field(2));
+		m_board.at(2).push_back(Hitori_Field(8));
+		m_board.at(2).push_back(Hitori_Field(9));
+		m_board.at(2).push_back(Hitori_Field(2));
+		m_board.at(2).push_back(Hitori_Field(5));
+		m_board.at(2).push_back(Hitori_Field(4));
+		m_board.at(2).push_back(Hitori_Field(6));
+		m_board.at(2).push_back(Hitori_Field(9));
+		m_board.at(2).push_back(Hitori_Field(1));
+		m_board.at(2).push_back(Hitori_Field(8));
+
+		m_board.at(3).push_back(Hitori_Field(12));
+		m_board.at(3).push_back(Hitori_Field(2));
+		m_board.at(3).push_back(Hitori_Field(10));
+		m_board.at(3).push_back(Hitori_Field(1));
+		m_board.at(3).push_back(Hitori_Field(10));
+		m_board.at(3).push_back(Hitori_Field(9));
+		m_board.at(3).push_back(Hitori_Field(4));
+		m_board.at(3).push_back(Hitori_Field(11));
+		m_board.at(3).push_back(Hitori_Field(7));
+		m_board.at(3).push_back(Hitori_Field(6));
+		m_board.at(3).push_back(Hitori_Field(5));
+		m_board.at(3).push_back(Hitori_Field(12));
+
+		m_board.at(4).push_back(Hitori_Field(4));
+		m_board.at(4).push_back(Hitori_Field(12));
+		m_board.at(4).push_back(Hitori_Field(8));
+		m_board.at(4).push_back(Hitori_Field(5));
+		m_board.at(4).push_back(Hitori_Field(12));
+		m_board.at(4).push_back(Hitori_Field(6));
+		m_board.at(4).push_back(Hitori_Field(5));
+		m_board.at(4).push_back(Hitori_Field(10));
+		m_board.at(4).push_back(Hitori_Field(7));
+		m_board.at(4).push_back(Hitori_Field(1));
+		m_board.at(4).push_back(Hitori_Field(2));
+		m_board.at(4).push_back(Hitori_Field(3));
+
+		m_board.at(5).push_back(Hitori_Field(6));
+		m_board.at(5).push_back(Hitori_Field(12));
+		m_board.at(5).push_back(Hitori_Field(1));
+		m_board.at(5).push_back(Hitori_Field(1));
+		m_board.at(5).push_back(Hitori_Field(8));
+		m_board.at(5).push_back(Hitori_Field(12));
+		m_board.at(5).push_back(Hitori_Field(9));
+		m_board.at(5).push_back(Hitori_Field(8));
+		m_board.at(5).push_back(Hitori_Field(3));
+		m_board.at(5).push_back(Hitori_Field(5));
+		m_board.at(5).push_back(Hitori_Field(1));
+		m_board.at(5).push_back(Hitori_Field(11));
+
+		m_board.at(6).push_back(Hitori_Field(12));
+		m_board.at(6).push_back(Hitori_Field(5));
+		m_board.at(6).push_back(Hitori_Field(5));
+		m_board.at(6).push_back(Hitori_Field(8));
+		m_board.at(6).push_back(Hitori_Field(7));
+		m_board.at(6).push_back(Hitori_Field(9));
+		m_board.at(6).push_back(Hitori_Field(11));
+		m_board.at(6).push_back(Hitori_Field(12));
+		m_board.at(6).push_back(Hitori_Field(6));
+		m_board.at(6).push_back(Hitori_Field(9));
+		m_board.at(6).push_back(Hitori_Field(10));
+		m_board.at(6).push_back(Hitori_Field(8));
+
+		m_board.at(7).push_back(Hitori_Field(10));
+		m_board.at(7).push_back(Hitori_Field(6));
+		m_board.at(7).push_back(Hitori_Field(9));
+		m_board.at(7).push_back(Hitori_Field(11));
+		m_board.at(7).push_back(Hitori_Field(1));
+		m_board.at(7).push_back(Hitori_Field(5));
+		m_board.at(7).push_back(Hitori_Field(6));
+		m_board.at(7).push_back(Hitori_Field(3));
+		m_board.at(7).push_back(Hitori_Field(4));
+		m_board.at(7).push_back(Hitori_Field(7));
+		m_board.at(7).push_back(Hitori_Field(8));
+		m_board.at(7).push_back(Hitori_Field(2));
+
+		m_board.at(8).push_back(Hitori_Field(8));
+		m_board.at(8).push_back(Hitori_Field(11));
+		m_board.at(8).push_back(Hitori_Field(6));
+		m_board.at(8).push_back(Hitori_Field(5));
+		m_board.at(8).push_back(Hitori_Field(2));
+		m_board.at(8).push_back(Hitori_Field(3));
+		m_board.at(8).push_back(Hitori_Field(12));
+		m_board.at(8).push_back(Hitori_Field(2));
+		m_board.at(8).push_back(Hitori_Field(9));
+		m_board.at(8).push_back(Hitori_Field(12));
+		m_board.at(8).push_back(Hitori_Field(7));
+		m_board.at(8).push_back(Hitori_Field(2));
+
+		m_board.at(9).push_back(Hitori_Field(3));
+		m_board.at(9).push_back(Hitori_Field(11));
+		m_board.at(9).push_back(Hitori_Field(4));
+		m_board.at(9).push_back(Hitori_Field(12));
+		m_board.at(9).push_back(Hitori_Field(12));
+		m_board.at(9).push_back(Hitori_Field(2));
+		m_board.at(9).push_back(Hitori_Field(8));
+		m_board.at(9).push_back(Hitori_Field(5));
+		m_board.at(9).push_back(Hitori_Field(1));
+		m_board.at(9).push_back(Hitori_Field(10));
+		m_board.at(9).push_back(Hitori_Field(4));
+		m_board.at(9).push_back(Hitori_Field(6));
+
+		m_board.at(10).push_back(Hitori_Field(2));
+		m_board.at(10).push_back(Hitori_Field(3));
+		m_board.at(10).push_back(Hitori_Field(4));
+		m_board.at(10).push_back(Hitori_Field(6));
+		m_board.at(10).push_back(Hitori_Field(11));
+		m_board.at(10).push_back(Hitori_Field(5));
+		m_board.at(10).push_back(Hitori_Field(1));
+		m_board.at(10).push_back(Hitori_Field(3));
+		m_board.at(10).push_back(Hitori_Field(10));
+		m_board.at(10).push_back(Hitori_Field(12));
+		m_board.at(10).push_back(Hitori_Field(5));
+		m_board.at(10).push_back(Hitori_Field(9));
+
+		m_board.at(11).push_back(Hitori_Field(2));
+		m_board.at(11).push_back(Hitori_Field(8));
+		m_board.at(11).push_back(Hitori_Field(7));
+		m_board.at(11).push_back(Hitori_Field(4));
+		m_board.at(11).push_back(Hitori_Field(12));
+		m_board.at(11).push_back(Hitori_Field(10));
+		m_board.at(11).push_back(Hitori_Field(3));
+		m_board.at(11).push_back(Hitori_Field(6));
+		m_board.at(11).push_back(Hitori_Field(5));
+		m_board.at(11).push_back(Hitori_Field(11));
+		m_board.at(11).push_back(Hitori_Field(9));
+		m_board.at(11).push_back(Hitori_Field(3));
+	}*/
 	
 }
 
@@ -335,6 +495,8 @@ bool Hitori_Board::IsConstraintSafe(int row, int column, int num, State state)
 	// Check constraints for white field
 	if (state == State::WHITE)
 		return (!UsedInRow(row, num) && !UsedInCol(column, num));
+
+	// Check constraints for black field
 	else if (state == State::BLACK)
 	{ 
 		// find first white element on board
@@ -389,6 +551,34 @@ bool Hitori_Board::SolveHitori()
 	
 }
 
+#pragma region ForwardChecking
+
+// If you have a corner with two similar numbers, you can set a white cell
+void Hitori_Board::CheckDoubleCorner()
+{
+
+	if (m_board.at(0).at(0).GetNumber() == m_board.at(0).at(1).GetNumber() || 
+		m_board.at(0).at(1).GetNumber() == m_board.at(1).at(1).GetNumber())
+		m_board.at(1).at(0).SetState(State::WHITE);
+
+	if (m_board.at(0).at(0).GetNumber() == m_board.at(1).at(0).GetNumber() ||
+		m_board.at(1).at(0).GetNumber() == m_board.at(1).at(1).GetNumber())
+		m_board.at(0).at(1).SetState(State::WHITE);
+
+	if (m_board.at(0).at(m_fieldSize - 2).GetNumber() == m_board.at(0).at(m_fieldSize - 1).GetNumber() ||
+		m_board.at(0).at(m_fieldSize - 2).GetNumber() == m_board.at(1).at(m_fieldSize - 2).GetNumber())
+		m_board.at(1).at(m_fieldSize - 1).SetState(State::WHITE);
+}
+
+
+
+
+void Hitori_Board::CheckforPatterns()
+{
+	CheckDoubleCorner();
+}
+
+#pragma endregion
 
 
 #pragma region Unused
