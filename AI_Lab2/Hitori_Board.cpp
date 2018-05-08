@@ -161,7 +161,7 @@ void Hitori_Board::InitBoard(int number)
 		m_board.at(7).push_back(Hitori_Field(8));
 	}
 
-	/*else if (m_fieldSize == 12)
+	else if (m_fieldSize == 12)
 	{
 		m_board.at(0).push_back(Hitori_Field(9));
 		m_board.at(0).push_back(Hitori_Field(9));
@@ -318,7 +318,7 @@ void Hitori_Board::InitBoard(int number)
 		m_board.at(11).push_back(Hitori_Field(11));
 		m_board.at(11).push_back(Hitori_Field(9));
 		m_board.at(11).push_back(Hitori_Field(3));
-	}*/
+	}
 	
 }
 
@@ -544,7 +544,7 @@ bool Hitori_Board::BackTracking()
 
 			cout << "assigned state = " << (State)(i) << " on field (" << row << "," << column << ")\n\n";
 
-			PrintBoard();
+			//PrintBoard();
 
 			// return if success
 			if (BackTracking())
@@ -797,12 +797,12 @@ bool Hitori_Board::ForwardChecking()
 					backDomain.at(g).push_back(m_board.at(g).at(w).GetDomainArray());
 			}
 
-			PrintBoardFC();
+			//PrintBoardFC();
 
 			if (ConstraintCheckFC(row, column))
 			{
 				cout << "results after constraint checking\n\n";
-				PrintBoardFC();
+				//PrintBoardFC();
 				if (ForwardChecking())
 					// return if success
 					return true;
@@ -821,7 +821,7 @@ bool Hitori_Board::ForwardChecking()
 
 
 			cout << "results after returning previous stare\n\n";
-			PrintBoardFC();
+			//PrintBoardFC();
 		}
 	}
 	cout << "apply backtracking\n\n";
